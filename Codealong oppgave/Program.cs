@@ -4,56 +4,22 @@
     {
         static void Main(string[] args)
         {
+            var question1 = new Question("Hva er 2+2?", "C", "2", "3", "4");
+            var question2 = new Question("Hvilken by er norsk?", "A", "Oslo", "Ohio", "Omaha");
+            var question3 = new Question("Hvilken farge er ikke i det norske flagget?", "B", "Rød", "Grønn", "Blå");
+
+            Question[] questions = { question1, question2, question3 };
+
             var points = 0;
-
-            AskQuestion("Hva er 2+2?");
-            PossibleAnswers("2", "3", "4");
-            Console.WriteLine("Skriv inn a, b eller c: ");
-            points += CheckAnswer("c");
-
-            AskQuestion("Hvilken by er norsk?");
-            PossibleAnswers("Oslo", "Ohio", "Omaha");
-            Console.Write("Skriv inn a, b eller c: ");
-            points += CheckAnswer("a");
-
-            AskQuestion("Hvilken farge er ikke i den norske flagget?");
-            PossibleAnswers("Rød", "Grønn", "Blå");
-            Console.Write("Skriv inn a, b eller c: ");
-            points += CheckAnswer("b");
-
-            Console.WriteLine($"Du fikk {points} riktige."); 
-             
+            foreach (Question question in questions)
+            {
+                question.QuestionText();
+                question.PossibleAlternatives();
+                points += question.CheckAnswerFromUser();
+            }
+            Console.WriteLine($"Du fikk {points} riktig.");
 
             Console.ReadKey(true);
-        }
-
-        static void PossibleAnswers(params string[] alternatives)
-        {
-            var index = 0;
-            foreach (string alternative in alternatives)
-            {
-                var letter = Convert.ToChar('A' + index);
-                Console.WriteLine($"{letter} {alternative}");
-                index++;
-            }
-        }
-
-        static int CheckAnswer(string correctAnswer)
-        {
-            var answer = Console.ReadLine();
-            if (answer == correctAnswer)
-            {
-                Console.WriteLine("Riktig!");
-                return 1;
-            }
-
-            Console.WriteLine("Feil!");
-            return 0;
-        }
-
-        static void AskQuestion(string question)
-        {
-            Console.WriteLine(question);
         }
     }
 }
