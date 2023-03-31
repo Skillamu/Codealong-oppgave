@@ -40,14 +40,17 @@ namespace Codealong_oppgave
         {
             var answer = Console.ReadLine();
 
-            if (answer == _correctAnswer)
+            var correctAnswer = answer == _correctAnswer;
+            var points = 0;
+
+            if (!correctAnswer)
             {
-                Console.WriteLine("Riktig!\n");
-                return 1;
+                Console.WriteLine("Feil!\n");
+                return points;
             }
 
-            Console.WriteLine("Feil!\n");
-            return 0;
+            Console.WriteLine("Riktig!\n");
+            return ++points;
         }
     }
 }
